@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jvz/reactive-streams-examples.svg?branch=master)](https://travis-ci.org/jvz/reactive-streams-examples)
+
 This project contains sample code on implementing various [reactive stream APIs][apidocs].
 These examples are tested against the reactive streams TCK. There is an accompanying blog
 post being written to explain the code provided.
