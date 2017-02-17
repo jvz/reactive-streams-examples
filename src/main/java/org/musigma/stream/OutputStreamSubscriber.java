@@ -34,6 +34,7 @@ public class OutputStreamSubscriber implements Subscriber<Byte> {
 
     @Override
     public void onNext(final Byte b) {
+        if (cancelled) return;
         try {
             stream.write(Objects.requireNonNull(b));
         } catch (IOException e) {
@@ -46,12 +47,14 @@ public class OutputStreamSubscriber implements Subscriber<Byte> {
     @Override
     public void onError(final Throwable throwable) {
         Objects.requireNonNull(throwable);
+        if (cancelled) return;
         throwable.printStackTrace();
         cancelled = true;
     }
 
     @Override
     public void onComplete() {
+        if (cancelled) return;
         try {
             stream.close();
         } catch (IOException e) {
