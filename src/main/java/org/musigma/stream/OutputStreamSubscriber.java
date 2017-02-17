@@ -29,6 +29,7 @@ public class OutputStreamSubscriber implements Subscriber<Byte> {
             return;
         }
         this.subscription = subscription;
+        this.subscription.request(Long.MAX_VALUE);
     }
 
     @Override
