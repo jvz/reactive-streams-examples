@@ -40,7 +40,7 @@ public class OutputStreamSubscriber implements Subscriber<Byte> {
         } catch (IOException e) {
             e.printStackTrace();
             subscription.cancel();
-            cancelled = true;
+            closeAndCancel();
         }
     }
 
@@ -49,11 +49,15 @@ public class OutputStreamSubscriber implements Subscriber<Byte> {
         Objects.requireNonNull(throwable);
         if (cancelled) return;
         throwable.printStackTrace();
-        cancelled = true;
+        closeAndCancel();
     }
 
     @Override
     public void onComplete() {
+        closeAndCancel();
+    }
+
+    private void closeAndCancel() {
         if (cancelled) return;
         try {
             stream.close();
